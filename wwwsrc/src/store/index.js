@@ -17,15 +17,31 @@ let api = Axios.create({
 
 export default new Vuex.Store({
   state: {
-    publicKeeps: []
+    cars: []
   },
-  mutations: {},
+  mutations: {
+    setCars(state, cars){
+      state.cars = cars
+    }
+  },
   actions: {
     setBearer({}, bearer) {
       api.defaults.headers.authorization = bearer;
     },
     resetBearer() {
       api.defaults.headers.authorization = "";
+    },
+   async createCar({commit,dispatch}, newCar){
+      let res = await api.post("cars", newCar)
+      dispatch("getCars")
+    },
+    async getCars({commit,dispatch}){
+      try {
+        let res = await api.get("cars");
+        commit("setCars", res.data)
+      } catch (error) {
+        console.error(error)
+      }
     }
   }
 });

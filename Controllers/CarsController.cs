@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace fullstack_gregslist.Controllers
 {
-  [Authorize]
   [ApiController]
   [Route("api/[controller]")]
   public class CarsController : ControllerBase
@@ -32,7 +31,7 @@ namespace fullstack_gregslist.Controllers
           throw;
       }
     }
-
+  [Authorize]
     [HttpPost]
     public ActionResult<Car> Create([FromBody] Car newCar)
     {

@@ -9,7 +9,7 @@ namespace fullstack_gregslist.Models
     public string ImgUrl { get; set; }
     public string Decription { get; set; }
     public int ProductionYear { get; set; }
-    public decimal Price { get; set; }
+    public int Price { get; set; }
 
 
 
