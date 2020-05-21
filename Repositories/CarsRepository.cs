@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Data;
 using Dapper;
 using fullstack_gregslist.Models;
@@ -18,12 +19,18 @@ namespace fullstack_gregslist.Repositories
     {
       string sql = @"
         INSERT INTO cars
-        (make, model, userId)
+        (make, model, imgUrl, decription, productionYear, price, userId)
         VALUES
-        (@Make, @Model, @UserId);
+        (@Make, @Model, @ImgUrl, @Decription, @ProductionYear, @Price, @UserId);
         SELECT LAST_INSERT_ID()";
       newCar.Id = _db.ExecuteScalar<int>(sql, newCar);
       return newCar;
+    }
+
+    internal IEnumerable<Car> GetAll()
+    {
+      string sql = "SELECT * FROM cars";
+      return _db.Query<Car>(sql);
     }
   }
 }

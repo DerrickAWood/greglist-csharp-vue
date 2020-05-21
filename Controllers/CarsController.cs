@@ -1,10 +1,13 @@
 using System;
+using System.Collections.Generic;
 using System.Security.Claims;
 using fullstack_gregslist.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace fullstack_gregslist.Controllers
 {
+  [Authorize]
   [ApiController]
   [Route("api/[controller]")]
   public class CarsController : ControllerBase
@@ -14,6 +17,20 @@ namespace fullstack_gregslist.Controllers
     public CarsController(CarsService cs)
     {
       _cs = cs;
+    }
+
+    [HttpGet]
+    public ActionResult<IEnumerable<Car>> GetAll()
+    {
+      try
+      {
+          return Ok(_cs.GetAll());
+      }
+      catch (System.Exception)
+      {
+          
+          throw;
+      }
     }
 
     [HttpPost]

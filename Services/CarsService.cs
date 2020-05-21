@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using fullstack_gregslist.Models;
 using fullstack_gregslist.Repositories;
 
@@ -16,6 +17,11 @@ namespace fullstack_gregslist.Controllers
     internal Car Create(Car newCar)
     {
       return _repo.Create(newCar);
+    }
+
+    internal IEnumerable<Car> GetAll()
+    {
+      return _repo.GetAll();
     }
   }
 }
