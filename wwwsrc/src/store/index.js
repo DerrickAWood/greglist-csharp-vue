@@ -49,6 +49,7 @@ export default new Vuex.Store({
          await api.delete("cars/"+ carId)
         dispatch("getCars")
       } catch (error) {
+        alert(error)
         console.error(error)
       }
     }
