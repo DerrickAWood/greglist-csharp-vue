@@ -23,5 +23,29 @@ namespace fullstack_gregslist.Controllers
     {
       return _repo.GetAll();
     }
+
+    public Car GetById(int id)
+    {
+      Car foundCar = _repo.GetById(id);
+      if(foundCar == null)
+      {
+        throw new Exception("invalid id");
+      }
+      return foundCar;
+    }
+
+    internal string Delete(int id, string userId)
+    {
+      Car foundCar = GetById(id);
+            if (foundCar.UserId != userId)
+            {
+                throw new Exception("not your car");
+            }
+            if (_repo.Delete(id, userId))
+            {
+                return "deleted.";
+            }
+            throw new Exception("ooopps");
+    }
   }
 }

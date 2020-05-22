@@ -50,6 +50,26 @@ namespace fullstack_gregslist.Controllers
         return BadRequest(err.Message);
       }
     }
+    [Authorize]
+    [HttpDelete("{id}")]
+    public ActionResult<string> Delete(int id)
+    {
+      try
+      {
+        Claim user = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier);
+                if (user == null)
+                {
+                    throw new Exception("you must be logged in to delete");
+                }
+            string userId = user.Value;
+           return Ok(_cs.Delete(id, userId));
+      }
+      catch (System.Exception error)
+      {
+          return BadRequest(error.Message);
+      }
+     
+    }
 
   }
 }

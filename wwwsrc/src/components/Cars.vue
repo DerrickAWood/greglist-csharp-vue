@@ -27,8 +27,16 @@
     </div>
     <button type="submit" class="btn btn-primary btn-lg">SUBMIT</button>
     </form>
-    <div class="col-4" v-for="car in cars" :key="car.id">
-      {{car.make}}
+    <div class="row justify-content-center">
+      <div class="col-3 border rounded m-3 img-fluid" v-for="car in cars" :key="car.id">
+        <h1>{{car.make}}</h1>
+        <h1>{{car.model}}</h1>
+        <img :src="car.imgUrl" class="img-fluid"  alt="">
+        <h1>{{car.price}}</h1>
+        <h1>{{car.year}}</h1>
+        <h1>{{car.decription}}</h1>
+        <button @click="deleteCar(car.id)" class="btn btn-danger">Delete</button>
+      </div>
     </div>
   </div>
 </template>
@@ -55,6 +63,10 @@ export default {
       this.newCar.productionYear = +this.newCar.productionYear;
       this.newCar.price = +this.newCar.price;
       this.$store.dispatch("createCar", this.newCar);
+    },
+    deleteCar(carId){
+      this.$store.dispatch("deleteCar", carId)
+
     }
   },
   components: {}

@@ -27,10 +27,23 @@ namespace fullstack_gregslist.Repositories
       return newCar;
     }
 
+    internal Car GetById(int id)
+    {
+      string sql = "SELECT * FROM cars WHERE id = @id";
+      return _db.QueryFirstOrDefault<Car>(sql, new {id});
+    }
+
     internal IEnumerable<Car> GetAll()
     {
       string sql = "SELECT * FROM cars";
       return _db.Query<Car>(sql);
+    }
+
+    internal bool Delete(int id, string userId)
+    {
+      string sql = "DELETE FROM cars WHERE id = @id AND userId = @userId LIMIT 1";
+            int affectedRows = _db.Execute(sql, new { id, userId });
+            return affectedRows == 1;
     }
   }
 }
