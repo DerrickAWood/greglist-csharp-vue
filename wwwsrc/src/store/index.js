@@ -45,7 +45,6 @@ export default new Vuex.Store({
     },
     async deleteCar({commit, dispatch}, carId){
       try {
-     debugger
          await api.delete("cars/"+ carId)
         dispatch("getCars")
       } catch (error) {
